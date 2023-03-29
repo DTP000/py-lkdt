@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{% endblock  %}</title>
+    {% include "pages/styles.html" %}
+</head>
+<body>
+    <header>
+        <div class="top-header border-bottom">
+            <div class="container">
+                <div class="row py-2">
+                    <div class="col ">
+                        Hotline: <a class="text-decoration-none text-primary fw-bold url" href="tel:+84901174550">090 117 4550</a>
+                    </div>
+                    <div class="col">
+                        <div class="text-end">
+                            <ul class="list-inline mb-0">
+                                <li class="list-inline-item"><a class="text-decoration-none url" asp-controller="Admin" asp-action="Index">Admin</a></li>
+                                <li class="list-inline-item"><a class="text-decoration-none url" href="#" data-bs-toggle="modal" data-bs-target="#register">Đăng ký</a></li>
+                                <li class="list-inline-item"><a class="text-decoration-none url" href="#" data-bs-toggle="modal" data-bs-target="#login">Đăng nhập</a></li>
+                                <li class="list-inline-item"><a class="text-decoration-none url" asp-area="" asp-controller="User" asp-action="profile">Username</a></li>
+                                <li class="list-inline-item"><a class="text-decoration-none url" asp-area="" asp-controller="Auth" asp-action="logout">Đăng xuất</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% include "pages/header.html" %}
+    </header>
+    <div class="container">
+        {% block main %}
+        {% endblock %}
+    </div>
+    {% include "pages/footer.html" %}
+    {% include "pages/script.html" %}
+</body>
+</html>

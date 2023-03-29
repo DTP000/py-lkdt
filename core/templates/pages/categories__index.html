@@ -1,0 +1,58 @@
+{% load static %}
+{% block categories__index %}
+<div class="bread-crumb">
+	<div class="container">
+		<div class="row">
+			<div class="mt-2" style="-bs-breadcrumb-divider: '&gt;&gt;';"
+				aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item">Trang chủ</li>
+					<li class="breadcrumb-item active text-primary" aria-current="page">@Model.Category</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end breadcrumb -->
+
+<!-- Chuyên mục sản phẩm -->
+    <div class="search">
+        <div class="container">
+
+            <div class="row">
+                <div class="my-3">
+                <h1 class="fs-4 text-uppercase page-title">@Model.Category</h1>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-md-3 col-sm-6 col-6">
+                    <div class="row">
+                        <div class="card h-100 product">
+                            <a href="Products/Details/@item.Id" class="product-url" title="@Html.DisplayFor(modelItem => item.NameP)">
+                                <img src="@Html.DisplayFor(modelItem => item.Image)" alt="@Html.DisplayFor(modelItem => item.NameP)">
+                            </a>
+                            <div class="card-body product-info">
+                                <h3 class="product-name text-truncate ">
+                                    <a class="text-decoration-none text-primary" href="Products/Details/@item.Id">@Html.DisplayFor(modelItem => item.NameP)</a>
+                                </h3>
+                                <div class="product-price">
+                                    <span class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Price)₫</span>
+                                </div>
+                                <div class="review">
+                                    <span class="active"><i class="fa fa-star" aria-hidden="true"></i></span>
+                                    <span class="active"><i class="fa fa-star" aria-hidden="true"></i></span>
+                                    <span class="active"><i class="fa fa-star" aria-hidden="true"></i></span>
+                                    <span class="active"><i class="fa fa-star" aria-hidden="true"></i></span>
+                                    <span class="active"><i class="fa fa-star" aria-hidden="true"></i>
+                                    <small class="text-secondary">(9 đánh giá)</small></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+ 
+        </div>
+    </div>
+{% endblock  %}

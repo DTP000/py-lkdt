@@ -1,0 +1,73 @@
+{% extends "adminn/base.html" %}
+{% load static %}      
+    {% block title %}
+    LKDT. - Danh Mục
+    {% endblock %}
+    {% block categories %}
+    <section class="content-header">
+        <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>DataTables</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">DataTables</li>
+                        </ol>
+                    </div>
+                </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">DataTable with minimal features & hover style</h3>
+                        </div>
+                        <div class="card-body">
+                            <table id="CategoryTable" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Tên danh mục</th>
+                                        <th>Hành động</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>Tên danh mục</th>
+                                        <th>Hành động</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+    const loadDataApi = async () => {
+        let dataCategories = await getDataAPI('https://localhost:7299/api/categories');
+        if (dataCategories == null) {
+            alert('Sự cố kết nối đến api');
+            return;
+        }
+        if (dataCategories.success) {
+            loadDataToTable(dataCategories.data);
+        } else {
+            alert(`Lỗi: ${dataCategories.message}`);
+        }
+    }
+    const loadDataToTable = (listCategories) => {
+        let elementTable = document.querySelector('#CategoryTable .tbody');
+
+    }
+    </script>
+    <script src="{% static 'js/Category/Index.js'%}" asp-append-version="true"></script>
+    {% endblock  %}

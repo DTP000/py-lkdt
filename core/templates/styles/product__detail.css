@@ -1,0 +1,40 @@
+.owl-nav button {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    outline: none;
+    height: 25px;
+}
+
+.owl-nav button svg {
+    width: 25px;
+    height: 25px;
+}
+
+.owl-nav button.owl-prev {
+    left: 25px;
+}
+
+.owl-nav button.owl-next {
+    right: 25px;
+}
+
+.owl-nav button span {
+    font-size: 45px;
+}
+
+.product-thumb .item img {
+    height: 100px;
+}
+.rte {
+    color: #000000;
+    border: solid 1px #e5e5e5;
+    border-top: none;
+    padding: 30px 45px 60px 30px;
+    font-size: 14px;
+    font-family: 'Arial',sans-serif;
+}
+.rte img {
+    width: 750px;
+    height: auto;
+}
