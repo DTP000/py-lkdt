@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}
+    {% endblock %}</title>
+    {% include "adminn/styles.html" %}
+</head>
+<body class="hold-transition sidebar-mini text-sm sidebar-collapse">
+    <div class="wrapper">
+        {% include "adminn/header.html" %}
+        {% include "adminn/sidebar.html" %}
+        <div class="content-wrapper">
+            {% block main %}
+            {% endblock %}
+        </div>
+        {% include "adminn/footer.html" %}
+    </div>
+    {% include "adminn/script.html" %}
+</body>
+</html>
