@@ -1,0 +1,17 @@
+{% extends "pages/base.html" %}
+{% block main %}
+    {% if listView %}
+        <ul>
+    {% for category in listView.categoryList %}
+        <li><a href="/hello/{{ category.id }}/">{{ category.name }}</a></li>
+    {% endfor %}
+    {% for product in listView.productList %}
+        {% if product.category.name == 'Hello' %}
+            <li><a href="/hello/{{ product.id }}/">{{ product.name }}</a></li>
+        {% endif %}
+    {% endfor %}
+        </ul>
+    {% else %}
+        <p>No polls are available.</p>
+    {% endif %}
+{% endblock %}
