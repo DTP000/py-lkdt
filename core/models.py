@@ -21,7 +21,7 @@ ORDER_STATUS_CHOICES = (
 )
 
 class Category(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, )
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
     is_deleted = models.IntegerField(choices=IS_DELETED_CHOICES, default=0, max_length=1)
