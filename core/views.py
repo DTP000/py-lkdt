@@ -1,8 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse, HttpRequest
-from django.views.generic import ListView, CreateView, FormView, View
+from django.views.generic import ListView, CreateView, FormView, View, DetailView, UpdateView
 from django.urls import reverse_lazy
-from .form import CategoryForm
 from .models import Category, Product
 
 # Create your views here.
@@ -22,6 +21,16 @@ class IndexHome(ListView):
 
 class CreateCategory(CreateView):
     model = Category
-    fields = "__all__"
+    fields = ['name']
     template_name = 'pages/formCreate.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('category:index')
+
+class DetailCategory(DetailView):
+    model = Product
+    template_name = 'pages/detailCategory.html'
+
+class UpdateCategory(UpdateView):
+    model = Category
+    fields = ['name']
+    template_name = 'pages/formCreate.html'
+    success_url = reverse_lazy('category:index')
