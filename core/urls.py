@@ -8,4 +8,7 @@ urlpatterns = [
     path('category/create', views.CreateCategory.as_view(), name='create'),
     path('category/detail/<int:pk>', views.DetailCategory.as_view(), name='detail'),
     path('category/update/<int:pk>', views.UpdateCategory.as_view(), name='update'),
+    path('account/register/',views.Register, name='register'),
+    path('account/login/',views.Login, name='login'),
+    path('account/logout',views.Logout, name='logout'),
 ]

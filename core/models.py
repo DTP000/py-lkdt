@@ -1,5 +1,6 @@
 from django.db import models
-
+from django.utils.safestring import mark_safe
+from django.contrib.auth.models import User
 # Create your models here.
 
 IS_DELETED_CHOICES = (
@@ -21,27 +22,13 @@ ORDER_STATUS_CHOICES = (
 )
 
 class Category(models.Model):
-<<<<<<< HEAD
-    name = models.CharField(max_length=100, )
-=======
     name = models.CharField(max_length=100, verbose_name='Tên danh mục')
->>>>>>> 867f9a9701d4a765cd5ae007ac3cc7d6655e311b
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     is_deleted = models.IntegerField(choices=IS_DELETED_CHOICES, default=0, max_length=1)
 
     def __str__(self):
         return self.name
-
-class User(models.Model):
-    user_name = models.CharField(max_length=50)
-    email = models.EmailField(max_length=150)
-    password = models.CharField(max_length=200)
-    phone = models.CharField(max_length=12)
-    role = models.IntegerField(max_length=1, choices=ROLE_CHOICES, default=3)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
-    is_deleted = models.IntegerField(choices=IS_DELETED_CHOICES, default=0, max_length=1)
 
 class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
@@ -60,10 +47,14 @@ class Product(models.Model):
 
 class Image(models.Model):    
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    url = models.TextField()
+    url = models.ImageField(null=False, blank=True, upload_to='photos')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     is_deleted = models.IntegerField(choices=IS_DELETED_CHOICES, default=0)
+    def admin_photo(self):
+        return mark_safe('<img src="{}" width=100px;height=150px />'.format(self.image.url))
+    admin_photo.short_description = 'image'
+    admin_photo.allow_tags = True
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

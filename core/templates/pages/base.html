@@ -19,11 +19,14 @@
                     <div class="col">
                         <div class="text-end">
                             <ul class="list-inline mb-0">
-                                <li class="list-inline-item"><a class="text-decoration-none url" asp-controller="Admin" asp-action="Index">Admin</a></li>
-                                <li class="list-inline-item"><a class="text-decoration-none url" href="#" data-bs-toggle="modal" data-bs-target="#register">Đăng ký</a></li>
-                                <li class="list-inline-item"><a class="text-decoration-none url" href="#" data-bs-toggle="modal" data-bs-target="#login">Đăng nhập</a></li>
-                                <li class="list-inline-item"><a class="text-decoration-none url" asp-area="" asp-controller="User" asp-action="profile">Username</a></li>
-                                <li class="list-inline-item"><a class="text-decoration-none url" asp-area="" asp-controller="Auth" asp-action="logout">Đăng xuất</a></li>
+                                <li class="list-inline-item"><a class="text-decoration-none url" href="/admin">Đăng nhập Admin</a></li>
+                                {% if user.is_authenticated %}
+                                    <li class="list-inline-item"><a class="text-decoration-none url">Chào, {{ user.username }}.</a></li>
+                                    <li class="list-inline-item"><a class="text-decoration-none url" href="{% url 'category:logout'%}">Đăng xuất</a></li>
+                                {% else %}
+                                    <li class="list-inline-item"><a class="text-decoration-none url" href="/account/register">Đăng ký</a></li>
+                                    <li class="list-inline-item"><a class="text-decoration-none url" href="/account/login">Đăng nhập</a></li>
+                                {% endif %}
                             </ul>
                         </div>
                     </div>

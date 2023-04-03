@@ -1,0 +1,30 @@
+{% extends "pages/base.html" %}
+{% block title %}
+login
+{% endblock %}
+{% block main %}
+<div class="container py-5">
+	<h1>Đặng nhập</h1>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <form action="." method="POST">
+            {% csrf_token%}
+            <label for="customer_email">Username <span class="required">*</span></label>
+            <input type="text"   class="input-control" placeholder = "Nhập Username" name="username" id="customer_email">
+            <label for="customer_password">Password <span class="required">*</span> </label>
+            <input type="Password" class="input-control" name="password" id="customer_password" placeholder = "Nhập Mật khẩu"> 
+            <p class="action-btn">
+            <p class="action-btn">  
+                <button type="submit" value="Đăng nhập" class="button_all">Đăng nhập</button>
+            </p>
+            <a href="/account/register" id="register-btn" class="button_all">Đăng ký</a>
+        </form>
+	
+	<p class="text-center">If you already have an account, <a href="/login">login</a> instead.</p>
+</div>
+{% endblock%}
