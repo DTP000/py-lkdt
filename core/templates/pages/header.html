@@ -54,8 +54,8 @@
                         </div>
                         <div class="offcanvas-contents mt-2 bg-primary">
                             <ul class="list-group">
-                                <li class="border-bottom border-1 border-white">
-                                    <a class="url text-decoration-none text-white" asp-area="" asp-controller="Home" asp-action="Index">Trang chủ</a>
+                                <li href="" class="border-bottom border-1 border-white">
+                                    <a h class="url text-decoration-none text-white" asp-area="" asp-controller="Home" asp-action="Index">Trang chủ</a>
                                     <!-- <i class="fa fa-plus" role="button" id="btdm" data-bs-toggle="dropdown" aria-expanded="false" aria-hidden="true"></i> -->
 
 
@@ -68,18 +68,6 @@
                                     <ul id="tatcasp" class="collapse list-group border-top border-white">
                                         <li class="border-bottom border-1 border-white">
                                             <a href="./san-pham-khuyen-mai" class="url ls-item text-white">Sản phẩm khuyến mãi</a>
-                                        </li>
-                                        <li class="border-bottom border-1 border-white">
-                                            <a href="./san-pham-noi-bat" class="url ls-item text-white">Sản phẩm nổi bật</a>
-                                        </li>
-                                        <li class="border-bottom border-1 border-white">
-                                            <a href="./san-pham-moi" class="url ls-item text-white">Sản phẩm mới</a>
-                                        </li>
-                                        <li class="border-bottom border-1 border-white">
-                                            <a href="./do-cu-thanh-ly" class="url ls-item text-white">Đồ cũ, thanh lý</a>
-                                        </li>
-                                        <li class="">
-                                            <a href="./ban-buon" class="url ls-item text-white">Bán buôn</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -96,9 +84,6 @@
                                         </li>
                                         <li class="border-bottom border-1 border-white">
                                             <a href="./tu-dien" class="url ls-item text-white">Tụ điện</a>
-                                        </li>
-                                        <li class="border-bottom border-1 border-white">
-                                            <a href="./diode" class="url ls-item text-white">Diode (Đi ốt)</a>
                                         </li>
                                         <li class="border-bottom border-1 border-white">
                                             <a href="./transistor" class="url ls-item text-white">Transistor BJT</a>
@@ -197,11 +182,14 @@
                                 Danh mục sản phẩm
                                 <i class="ps-5 fa fa-bars text-end" aria-hidden="true"></i>
                             </a>
+                            {% if listView %}
                             <ul class="danhmucul dropdown-menu me-4 border border-primary br-0" aria-labelledby="btdm">
-                                <li class="border-bottom py-1"><a class="dropdown-item" href="./mach-dien-tu">Mạch điện tử</a></li>
-                                <li class="border-bottom py-1"><a class="dropdown-item" href="./linh-kien">Linh kiện</a></li>
-                                <li class="py-1"><a class="dropdown-item" href="./xem-them">Xem thêm</a></li>
-                            </ul>
+                            {% for category in listView.categoryList %}
+                                <li class="border-bottom py-1"><a class="dropdown-item" href="{% url 'category:update' category.id %}">{{ category.name }}</a></li>
+                            {% endfor %}
+                                </ul>
+                            {% else %}
+                            {% endif %}
                         </div>
 
 
@@ -217,13 +205,14 @@
                                     <a class="nav-link url dropdown-toggle" href="#" id="dropa" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         Tất cả sản phẩm
                                     </a>
+                                    {% if listView %}
                                     <ul class="dropdown-menu border border-primary br-0 mt-2" aria-labelledby="dropa">
-                                        <li class="border-bottom py-1"><a class="dropdown-item" href="./san-pham-khuyen-mai">Sản phẩm khuyến mãi</a></li>
-                                        <li class="border-bottom py-1"><a class="dropdown-item" href="./san-pham-noi-bat">Sản phẩm nổi bật</a></li>
-                                        <li class="border-bottom py-1"><a class="dropdown-item" href="./san-pham-moi">Sản phẩm mới</a></li>
-                                        <li class="border-bottom py-1"><a class="dropdown-item" href="./do-cu-thanh-ly">Đồ cũ, thanh lý</a></li>
-                                        <li class=" py-1"><a class="dropdown-item" href="./ban-buon">Bán buôn</a></li>
+                                    {% for product in listView.productList %}
+                                        <li class="border-bottom py-1"><a class="dropdown-item" href="{% url 'category:detail' product.id %}">{{ product.name }}</a></li>
+                                    {% endfor %}
                                     </ul>
+                                    {% else %}
+                                    {% endif %}
                                 </li>
                                 <li class="nav-item px-2 dropdown">
                                     <a class="nav-link url dropdown-toggle" href="#" id="dropb" role="button" data-bs-toggle="dropdown" aria-expanded="false">
