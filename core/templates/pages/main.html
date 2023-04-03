@@ -63,7 +63,7 @@
         </div>
         <!-- end banner -->
             <!-- @name -->
-            <div id="@name" class="@name mt-5">
+            <div id="new-product" class="@name mt-5">
                         <div class="container-md">
                             <div class="row">
                                 <div class="col ">
@@ -71,30 +71,31 @@
                                         <span class="icon_tags d-inline-block bg-primary p-3 text-white">
                                             <i class="fa fa-tags" aria-hidden="true"></i>
                                         </span>
-                                        <h2 class="title text-uppercase d-inline-block ms-3">@nameUnicode</h2>
+                                        <h2 class="title text-uppercase d-inline-block ms-3">Sản phẩm mới nhất</h2>
                                     </div>
 
                                     <div class="border-top-0 border">
 
                                         <div class="row">
                                             <div class="owl-carousel owl-theme">
+                                                        {% if listView %}
+                                                        {% for product in listView.productList %}
                                                     <div class="item">
                                                         <div class="card h-100 product">
-
-                                                            <a href="Products/Details/@item.Id"
-                                                    title="@Html.DisplayFor(modelItem => item.NameP)"
-                                                    class="product-url">
-                                                                <img src="@Html.DisplayFor(modelItem => item.Image)"
-                                                            alt="@Html.DisplayFor(modelItem => item.NameP)">
+                                                            <a href="{% url 'category:detail' product.id %}"
+                                                            title=""
+                                                            class="product-url">
+                                                                <img src="{% static 'img/{{ product.image }}' %}"
+                                                            alt="">
                                                             </a>
                                                             <div class="card-body product-info">
                                                                 <h3 class="product-name text-truncate ">
                                                                     <a class="text-decoration-none text-primary"
-                                                            href="Products/Details/@item.Id"
-                                                            title="@Html.DisplayFor(modelItem => item.NameP)">@Html.DisplayFor(modelItem => item.NameP)</a>
+                                                            href=""
+                                                            title="{% url 'category:detail' product.id %}">{{ product.name }}</a>
                                                                 </h3>
                                                                 <div class="product-price">
-                                                                    <span class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Price)₫</span>
+                                                                    <span class="text-primary fw-bold">{{ product.price }}</span>
                                                                 </div>
                                                                 <div class="review">
                                                                     <span class="active">
@@ -120,6 +121,10 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                        {% endfor %}
+                                                        {% else %}
+                                                            <p>No polls are available.</p>
+                                                        {% endif %}
                                             </div>
                                         </div>
 
@@ -182,16 +187,19 @@
                                         <div class="tab-pane fade show active" id="machtienCS" role="tabpanel"
                                         aria-labelledby="home-tab">
                                             <div class="row">
+                                                
+                                                        {% if listView %}
+                                                        {% for product in listView.productList %}
                                                 <div class="col-lg-3 col-md-4 col-sm-6 p-4 col-6">
                                                         <div class="row bg-white">
                                                             <div class="col-sm-12">
                                                                 <div class="product-thumnail">
                                                                     <a class="product-url product-tab"
-                                                        href="Products/Details/@item.Id"
-                                                                title="@Html.DisplayFor(modelItem => item.NameP)">
+                                                        href="{% url 'category:detail' product.id %}"
+                                                                title="">
                                                                         <img class=""
-                                                                src="@Html.DisplayFor(modelItem => item.Image)"
-                                                                alt="@Html.DisplayFor(modelItem => item.NameP)">
+                                                                src="{% static 'img/{{ product.image }}' %}"
+                                                                alt="">
                                                                     </a>
                                                                 </div>
                                                             </div>
@@ -199,11 +207,15 @@
                                                                 <div class="product-info">
                                                                     <h3 class="product-name text-truncate">
                                                                         <a class="text-decoration-none text-primary"
-                                                                    href="Products/Details/@item.Id"
-                                                                    title="@Html.DisplayFor(modelItem => item.NameP)">@Html.DisplayFor(modelItem => item.NameP)</a>
+                                                                    href="{% url 'category:detail' product.id %}"
+                                                                    title="">{{ product.name }}</a>
                                                                     </h3>
                                                                     <div class="product-price">
-                                                                        <span class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Price)₫</span>
+                                                                        <span class="text-primary fw-bold">{{ product.price }}₫</span>
+                                                                    </div>
+                                                                    <br>
+                                                                    <div class="product-price">
+                                                                        <h6>{{ product.descr }}</h6>
                                                                     </div>
                                                                     <div class="review">
                                                                         <span class="active">
@@ -227,105 +239,121 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                        {% endfor %}
+                                                        {% else %}
+                                                            <p>No polls are available.</p>
+                                                        {% endif %}
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="machCSLon" role="tabpanel" aria-labelledby="profile-tab">
                                             <div class="row">
+                                                {% if listView %}
+                                                        {% for product in listView.productList %}
                                                 <div class="col-lg-3 col-md-4 col-sm-6 p-4 col-6">
-                                                    <div class="row bg-white">
-                                                        <div class="col-sm-12">
-                                                            <div class="product-thumnail">
-                                                                <a class="product-url product-tab"
-                                                        href="Products/Details/@item.Id"
-                                                        title="@Html.DisplayFor(modelItem => item.NameP)">
-                                                                    <img class=""
-                                                                src="@Html.DisplayFor(modelItem => item.Image)"
-                                                                alt="@Html.DisplayFor(modelItem => item.NameP)">
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-12">
-                                                            <div class="product-info">
-                                                                <h3 class="product-name text-truncate">
-                                                                    <a class="text-decoration-none text-primary"
-                                                            href="Products/Details/@item.Id"
-                                                            title="@Html.DisplayFor(modelItem => item.NameP)">@Html.DisplayFor(modelItem => item.NameP)</a>
-                                                                </h3>
-                                                                <div class="product-price">
-                                                                    <span class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Price)₫</span>
+                                                        <div class="row bg-white">
+                                                            <div class="col-sm-12">
+                                                                <div class="product-thumnail">
+                                                                    <a class="product-url product-tab"
+                                                        href="{% url 'category:detail' product.id %}"
+                                                                title="">
+                                                                        <img class=""
+                                                                src="{% static 'img/{{ product.image }}' %}"
+                                                                alt="">
+                                                                    </a>
                                                                 </div>
-                                                                <div class="review">
-                                                                    <span class="active">
-                                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                                    </span>
-                                                                    <span class="active">
-                                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                                    </span>
-                                                                    <span class="active">
-                                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                                    </span>
-                                                                    <span class="active">
-                                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                                    </span>
-                                                                    <span class="active">
-                                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                                        <small class="text-secondary">(9 đánh giá)</small>
-                                                                    </span>
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <div class="product-info">
+                                                                    <h3 class="product-name text-truncate">
+                                                                        <a class="text-decoration-none text-primary"
+                                                                    href="{% url 'category:detail' product.id %}"
+                                                                    title="">{{ product.name }}</a>
+                                                                    </h3>
+                                                                    <div class="product-price">
+                                                                        <span class="text-primary fw-bold">{{ product.price }}₫</span>
+                                                                    </div>
+                                                                    <div class="review">
+                                                                        <span class="active">
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                        </span>
+                                                                        <span class="active">
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                        </span>
+                                                                        <span class="active">
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                        </span>
+                                                                        <span class="active">
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                        </span>
+                                                                        <span class="active">
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                            <small class="text-secondary">(9 đánh giá)</small>
+                                                                        </span>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                        {% endfor %}
+                                                        {% else %}
+                                                            <p>No polls are available.</p>
+                                                        {% endif %}
                                         </div>
                                         </div>
                                         <div class="tab-pane fade" id="machCSgiare" role="tabpanel" aria-labelledby="contact-tab">
                                             <div class="row">
+                                            {% if listView %}
+                                                        {% for product in listView.productList %}
                                                 <div class="col-lg-3 col-md-4 col-sm-6 p-4 col-6">
-                                                    <div class="row bg-white">
-                                                        <div class="col-sm-12">
-                                                            <div class="product-thumnail">
-                                                                <a class="product-url product-tab"
-                                                        href="Products/Details/@item.Id"
-                                                        title="@Html.DisplayFor(modelItem => item.NameP)">
-                                                                    <img class=""
-                                                                src="@Html.DisplayFor(modelItem => item.Image)"
-                                                                alt="@Html.DisplayFor(modelItem => item.NameP)">
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-12">
-                                                            <div class="product-info">
-                                                                <h3 class="product-name text-truncate">
-                                                                    <a class="text-decoration-none text-primary"
-                                                            href="Products/Details/@item.Id"
-                                                            title="@Html.DisplayFor(modelItem => item.NameP)">@Html.DisplayFor(modelItem => item.NameP)</a>
-                                                                </h3>
-                                                                <div class="product-price">
-                                                                    <span class="text-primary fw-bold">@Html.DisplayFor(modelItem => item.Price)₫</span>
+                                                        <div class="row bg-white">
+                                                            <div class="col-sm-12">
+                                                                <div class="product-thumnail">
+                                                                    <a class="product-url product-tab"
+                                                        href="{% url 'category:detail' product.id %}"
+                                                                title="">
+                                                                        <img class=""
+                                                                src="{% static 'img/{{ product.image }}' %}"
+                                                                alt="">
+                                                                    </a>
                                                                 </div>
-                                                                <div class="review">
-                                                                    <span class="active">
-                                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                                    </span>
-                                                                    <span class="active">
-                                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                                    </span>
-                                                                    <span class="active">
-                                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                                    </span>
-                                                                    <span class="active">
-                                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                                    </span>
-                                                                    <span class="active">
-                                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                                        <small class="text-secondary">(9 đánh giá)</small>
-                                                                    </span>
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <div class="product-info">
+                                                                    <h3 class="product-name text-truncate">
+                                                                        <a class="text-decoration-none text-primary"
+                                                                    href="{% url 'category:detail' product.id %}"
+                                                                    title="">{{ product.name }}</a>
+                                                                    </h3>
+                                                                    <div class="product-price">
+                                                                        <span class="text-primary fw-bold">{{ product.price }}₫</span>
+                                                                    </div>
+                                                                    <div class="review">
+                                                                        <span class="active">
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                        </span>
+                                                                        <span class="active">
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                        </span>
+                                                                        <span class="active">
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                        </span>
+                                                                        <span class="active">
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                        </span>
+                                                                        <span class="active">
+                                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                                            <small class="text-secondary">(9 đánh giá)</small>
+                                                                        </span>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                        </div>
+                                                        {% endfor %}
+                                                        {% else %}
+                                                            <p>No polls are available.</p>
+                                                        {% endif %}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -486,5 +514,81 @@
                     });
                 });
             </script>
+            <script>
+        $(document).ready(function () {
+            $('#new-product .owl-carousel').owlCarousel({
+                // loop:true,
+                margin: 0,
+                nav: true,
+                // items: 2,
+                mouseDrag: true,
+                touchDrag: true,
+                pullDrag: true,
+                dots: false,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    400: {
+                        items: 2
+                    },
+                    600: {
+                        items: 3
+                    },
+                    1000: {
+                        items: 4
+                    }
+                }
+            });
+            $('#so-cong-suat .owl-carousel').owlCarousel({
+                // loop:true,
+                margin: 0,
+                nav: true,
+                // items: 2,
+                mouseDrag: true,
+                touchDrag: true,
+                pullDrag: true,
+                dots: false,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    400: {
+                        items: 2
+                    },
+                    600: {
+                        items: 3
+                    },
+                    1000: {
+                        items: 4
+                    }
+                }
+            });
+            $('#cam-ket .owl-carousel').owlCarousel({
+                // loop:true,
+                margin: 0,
+                // nav:true,
+                // items: 2,
+                mouseDrag: true,
+                touchDrag: true,
+                pullDrag: true,
+                dots: false,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    400: {
+                        items: 2
+                    },
+                    600: {
+                        items: 2
+                    },
+                    1000: {
+                        items: 3
+                    }
+                }
+            });
+        });
+    </script>
     {% endblock %}
             

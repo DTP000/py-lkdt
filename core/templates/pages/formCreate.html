@@ -1,7 +1,10 @@
 {% extends "pages/base.html" %}
+{% block title %}
+Update - Category
+{% endblock %}
 {% block main %}
-    <form method="post" class="text-center">{% csrf_token %}
+    <form asp-controller="Search" method="post" class="text-center">{% csrf_token %}    
         {{ form.as_p }}
-        <input type="submit" value="Lưu">
+        <input type="submit" class="btn btn-info" value="Lưu">
     </form>
 {% endblock %}

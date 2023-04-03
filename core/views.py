@@ -9,7 +9,7 @@ from .models import Category, Product
 #     return render(request, 'pages/main.html')
 
 class IndexHome(ListView):
-    template_name = 'pages/demoContent.html'
+    template_name = 'pages/main.html'
     context_object_name = 'listView'
 
     def get_queryset(self):
@@ -27,7 +27,7 @@ class CreateCategory(CreateView):
 
 class DetailCategory(DetailView):
     model = Product
-    template_name = 'pages/detailCategory.html'
+    template_name = 'pages/product__detail.html'
 
 class UpdateCategory(UpdateView):
     model = Category
