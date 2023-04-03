@@ -1,0 +1,18 @@
+{% extends "pages/base.html" %}
+{% block main %}
+    <a href="{% url 'category:create'%}">Tạo mới danh mục</a> 
+    {% if listView %}
+        <ul>
+    {% for category in listView.categoryList %}
+        <li><a href="{% url 'category:detail' category.id %}">{{ category.name }}</a> <a class="ms-5" href="{% url 'category:update' category.id %}">Sửa danh mục</a></li>
+    {% endfor %}
+    {% for product in listView.productList %}
+        
+            <li><a href="{% url 'category:detail' product.id %}">{{ product.name }}</a> </li>
+        
+    {% endfor %}
+        </ul>
+    {% else %}
+        <p>No polls are available.</p>
+    {% endif %}
+{% endblock %}

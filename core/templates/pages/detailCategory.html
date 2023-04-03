@@ -1,0 +1,12 @@
+{% extends "pages/base.html" %}
+{% block main %}
+    <ul>
+        <li>Tên sản phẩm: {{ product.name }}</li>
+        <li>Giá sản phẩm: {{ product.price }}</li>
+        <li>{{ product.quantity }}</li>
+        <li>{{ product.created }}</li>
+        <li>{{ product.updated }}</li>
+        <li>{{ product.is_deleted }}</li>
+        <li>Của danh mục: {{ product.category.name }}</li>
+    </ul>
+{% endblock %}
