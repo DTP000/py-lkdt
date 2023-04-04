@@ -71,10 +71,11 @@ def Checkout(request):
     if not request.user.is_authenticated:
         return JsonResponse(
             {
-                "err_code": 532,
+                "err_code": 403,
                 "err_msg": "Chua dang nhap",
                 "data": {
-                    "id": 1,
+                    
+                    
                 }
             }
         )
