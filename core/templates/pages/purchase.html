@@ -8,7 +8,7 @@
                     aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">Trang chủ</li>
-                        <li class="breadcrumb-item active text-primary" aria-current="page">Giỏ hàng</li>
+                        <li class="breadcrumb-item active text-primary" aria-current="page">Đơn mua</li>
                     </ol>
                 </div>
             </div>
@@ -18,11 +18,11 @@
     <div id="gio-hang">
         <div class="container">
             <div class="row">
-                <div class="col-sm-12 title">
+                <!-- <div class="col-sm-12 title">
                     <h3 class="ten-gio-hang">
                         Giỏ hàng của bạn có <span class="sp-anna">0</span> sản phẩm
                     </h3>
-                </div>
+                </div> -->
                 <div class="col-sm-12 gio-hang-noi-dung mt-3 ">
                     
                     <div class="gh-table">
@@ -30,9 +30,9 @@
                             <table class="table table-light table-bordered border-primary table-responsive mb-2">
                                 <thead>
                                     <tr>
-                                        <th scope="col" class="ct">Ảnh sản phẩm</th>
-                                        <th scope="col" class="ct">Tên sản phẩm</th>
-                                        <th scope="col" class="ct">Đơn giá</th>
+                                        <th scope="col" class="ct">Mã đơn hàng</th>
+                                        <th scope="col" class="ct">Ngày đặt</th>
+                                        <th scope="col" class="ct">Thành tiền</th>
                                         <th scope="col" class="ct">Số lượng</th>
                                         <th scope="col" class="ct">Thành tiền</th>
                                         <th scope="col" class="ct">Xoá</th>
@@ -159,14 +159,10 @@
                 return;
             }
             if (dt.err_code == 0) {
-                //xoá giỏ hàng hiện tại
-                // localStorage.setItem('dataCard', JSON.stringify([]));
-
                 // điều hướng 
-                window.location.href = 'http://localhost:8000'
-
+                
             } else if (dt.err_code == 403){
-                window.location.href = 'http://localhost:8000/account/login/'
+                
             }else {
                 alert(`Lỗi: ${dt.err_msg}`);
             }
