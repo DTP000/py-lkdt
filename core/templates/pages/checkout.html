@@ -70,7 +70,7 @@
                                 <a class="btn btn-secondary text-uppercase fs-6" href="./home">
                                     Tiếp tục mua hàng
                                 </a>
-                                <a class="btn btn-primary text-uppercase fs-6" href="#" data-bs-toggle="modal" data-bs-target="#checkout">
+                                <a class="btn btn-primary text-uppercase fs-6" href="./checkOut">
                                     Thực hiện thanh toán
                                 </a>
                             </div>
@@ -81,81 +81,11 @@
         </div>
 
     </div>
-    <div class="modal fade" id="checkout" tabindex="-1" aria-labelledby="checkout" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header alert alert-primary">
-                    <h5 class="modal-title" id="register">Đăng kí</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="checkout" method="post">
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Tên người nhận: (*)</label>
-                            <input class="form-control" type="text" id="full-name" name="name" aria-describedby="userNameHelp"
-                                required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="phone" class="form-label">Số điện thoại: (*)</label>
-                            <input class="form-control" id="phone" type="text" name="phone" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="address" class="form-label">Địa chỉ: (*)</label>
-                            <textarea name="address" id="address" class="form-control" rows="5"></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="note" class="form-label">Ghi chú</label>
-                            <textarea name="note" id="note" class="form-control" rows="5"></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <button type="submit" class="btn btn-primary">Thanh toán</button>
-                        </div>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </div>
 {% endblock  %}
 
 {% block add_script %}
     <script>
-        const initDataCheckout = async ()=> {
-
-            let name = document.getElementById('full-name').value;
-            let phone = document.getElementById('phone').value;
-            let address = document.getElementById('address').value;
-            let note = document.getElementById('note').value;
-            let total_price = document.getElementById('thanh-tien-hihi').innerText.replaceAll('₫', '');
-
-
-            // lấy thông tin sản phẩm
-            let elmTr = document.querySelectorAll('input.inp-quan');
-            items = [];
-            elmTr.forEach(element => {
-                let idPrd = parseInt(element.getAttribute('data-id-product'));
-                let price = parseInt(element.getAttribute('data-price-product'));
-                let quantityPrd = parseInt(element.value);
-                items.push({
-                    product_id: parseInt(idPrd),
-                    price: parseInt(price),
-                    quantity: parseInt(quantityPrd),
-                });
-            }, items);
-
-            let dataCheckout = {
-                name: name,
-                phone: phone,
-                address: address,
-                total_price: total_price,
-                note: note,
-                items: items
-            }
-
-            console.log(dataCheckout)
-            let dt = await postData('http://localhost:8000/api/checkout', dataCheckout)
-        }
-var elementTableCard = document.querySelector('#gio-hang tbody');
+            var elementTableCard = document.querySelector('#gio-hang tbody');
 
 const loadDataApiPrd = async (id, quantity) => {
     let dataCategories = await getDataAPI(`http://localhost:8000/api/product/${id}`);
@@ -199,7 +129,7 @@ const convertToTr = (prd, quantity) => {
             <div class="soluong-sp spp">
                 <div class="input-number d-inline-block clearfix">
                     <button class="btn-num" onclick="giamSL('${prd.id}')" type="button">-</button>
-                    <input class="outline-none inp-quan" data-price-product="${prd.price}" data-id-product="${prd.id}" type="text" id="qtymb-${prd.id}" name="quantity" value="${quantity}" class="form-control prd_quantity">
+                    <input class="outline-none inp-quan" data-id-product="${prd.id}" type="text" id="qtymb-${prd.id}" name="quantity" value="${quantity}" class="form-control prd_quantity">
                     <button class="btn-num" onclick="tangSL('${prd.id}')" type="button">+</button>
                 </div>
             </div>
@@ -230,7 +160,6 @@ const loadCard = async () => {
     document.querySelector('.sp-anna').innerText = dataCard.length;
     dataCard.forEach(async itemPrd => {
         await loadDataApiPrd(itemPrd.idPrd, itemPrd.quantityPrd);
-        calcTotalPrice();
     }, elementTableCard);
     calcTotalPrice();
 }
@@ -300,9 +229,6 @@ function updateCardLocal() {
 
 $(document).ready(function () {
     loadCard();
-    setTimeout(()=>{
-        calcTotalPrice();
-    },  3000)
 });
     </script>
 {% endblock %}
