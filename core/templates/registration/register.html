@@ -1,20 +1,25 @@
-{% extends "pages/base.html" %}
+{% extends "pages/login__base.html" %}
 {% block title %}
 login
 {% endblock %}
 {% block main %}
-<div id="form" class="container" >
-    <div class="signup-form" >
-	<h1>Đăng kÝ</h1>
-        <form action="." method='POST'>
+<div class="login-body">
+<div class="text-center pt-4">
+    <a href="{% url 'category:index' %}" class="btn btn-light"><b>Trang Chủ</b></a>
+</div>
+<div class="">
+    <main class="main mt-1">
+        <form id="login_form" class="form_class" action="." method="POST">
             {% csrf_token %}
             {{form.as_p}}
-            <div class="login_submit mt-3">
-                <button type="submit">Đăng kÝ</button>
+            <div class="form_div">
+                <button class="submit_class" type="submit" form="login_form" onclick="return validarLogin()">Tạo tài khoản</button>
+            </div>
+            <div class="info_div">
+                <p><a href="/account/login">Quay lại trang đăng nhập !</a></p>
             </div>
         </form>
-	
-	<p class="text-center">If you already have an account, <a href="">login</a> instead.</p>
-    </div>
+    </main>
+</div>
 </div>
 {% endblock%}

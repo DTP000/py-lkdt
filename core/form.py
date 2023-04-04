@@ -9,10 +9,10 @@ IS_DELETED_CHOICES = (
 )
 
 class RegisterForm(forms.Form): 
-    username = forms.CharField(label='Username', max_length=50)
-    email = forms.EmailField(label='Email')
-    password = forms.CharField(label='Mật khẩu', widget=forms.PasswordInput())
-    passwordclaim = forms.CharField(label='Xác nhận mật khẩu', widget=forms.PasswordInput())
+    username = forms.CharField(label='Tên tài khoản', max_length=50, widget=forms.TextInput(attrs={'class': 'field_class'}))
+    email = forms.EmailField(label='Email', widget=forms.TextInput(attrs={'class': 'field_class'}))
+    password = forms.CharField(label='Mật khẩu', widget=forms.PasswordInput(attrs={'class': 'field_class'}))
+    passwordclaim = forms.CharField(label='Xác nhận mật khẩu', widget=forms.PasswordInput(attrs={'class': 'field_class'}))
 
     def clean_password2(self):
         if 'password' in self.cleaned_data:

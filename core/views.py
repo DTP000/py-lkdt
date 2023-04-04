@@ -2,7 +2,7 @@ from django.shortcuts import render,get_object_or_404, redirect
 from django.http import HttpResponse, HttpRequest,HttpResponseRedirect
 from django.views.generic import ListView, CreateView, FormView, View, DetailView, UpdateView
 from django.urls import reverse_lazy
-from .models import Category, Product
+from .models import Category, Product, Image
 from core.form import RegisterForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -17,7 +17,8 @@ class IndexHome(ListView):
     def get_queryset(self):
         listObject = {
             'categoryList' : Category.objects.all(),
-            'productList' : Product.objects.all()
+            'productList' : Product.objects.all(),
+            'imageList': Image.objects.all()
         }
         return listObject
 
