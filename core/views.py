@@ -1,14 +1,11 @@
 from django.shortcuts import render,get_object_or_404, redirect
-from django.http import HttpResponse, HttpRequest,HttpResponseRedirect, JsonResponse
+from django.http import HttpResponse, HttpRequest,HttpResponseRedirect
 from django.views.generic import ListView, CreateView, FormView, View, DetailView, UpdateView
 from django.urls import reverse_lazy
-from .models import Category, Product, Order, OrderDetail, User
+from .models import Category, Product, Image
 from core.form import RegisterForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-import json
-from django.views.decorators.csrf import csrf_exempt
-
 # Create your views here.
 # def index(request):
 #     return render(request, 'pages/main.html')
@@ -20,7 +17,8 @@ class IndexHome(ListView):
     def get_queryset(self):
         listObject = {
             'categoryList' : Category.objects.all(),
-            'productList' : Product.objects.all()
+            'productList' : Product.objects.all(),
+            'imageList': Image.objects.all()
         }
         return listObject
 
@@ -39,72 +37,6 @@ class UpdateCategory(UpdateView):
     fields = ['name']
     template_name = 'pages/formCreate.html'
     success_url = reverse_lazy('category:index')
-class DetailCard(ListView):
-    model = Product
-    template_name = 'pages/cart.html'
-    context_object_name = 'listView'
-
-def DetailProductApi(request, id):
-    product = Product.objects.get(id = id)
-    if not product:
-        return JsonResponse(
-            {
-                "err_code": 232,
-                "err_msg": "Khong tim thay san pham",
-            }
-        )
-    return JsonResponse(
-            {
-                "err_code": 0,
-                "err_msg": "Thành công",
-                "data": {
-                    "id": id,
-                    "name": product.name,
-                    "quantity": product.quantity,
-                    "price": product.price,
-                    "descr": product.descr,
-                }
-            }
-        )
-@csrf_exempt
-def Checkout(request):
-    if not request.user.is_authenticated:
-        return JsonResponse(
-            {
-                "err_code": 403,
-                "err_msg": "Chua dang nhap",
-                "data": {
-                    
-                    
-                }
-            }
-        )
-
-    data = json.loads(request.body)
-    name = data['name']
-    phone = data['phone']
-    address = data['address']
-    total_price = data['total_price']
-    note = data['note']
-    items = data['items']
-    # user = User.objects.get(id=1)
-    order = Order.objects.create(user=request.user, name=name, phone=phone, address=address, total_price=total_price, note=note)
-    order.save()
-    for item in items:
-        product = Product.objects.get(id=item['product_id'])
-        orderDetail = OrderDetail.objects.create(order=order, product=product, quantity=item['quantity'], price=item['price'])
-        orderDetail.save()
-    return JsonResponse(
-            {
-                "err_code": 0,
-                "err_msg": "Thành công",
-                "data": {
-                    "id": order.id,
-                },
-                "user": request.user.id
-            }
-        )
-
 
 def Register(request):
     form = RegisterForm()
